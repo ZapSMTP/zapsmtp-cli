@@ -1,0 +1,29 @@
+{
+  "name": "zapsmtp-cli",
+  "version": "0.1.0",
+  "description": "The official ZapSMTP command line: send, receive and track email, manage templates, domains, webhooks and everything else the API does",
+  "license": "MIT",
+  "homepage": "https://zapsmtp.com/docs/sdks/",
+  "keywords": ["cli", "email", "smtp", "transactional email", "zapsmtp", "api"],
+  "type": "module",
+  "engines": { "node": ">=18.3" },
+  "bin": { "zapsmtp": "dist/bin.js" },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "generate": "node ../codegen/generate.mjs --only cli",
+    "build": "node ../codegen/generate.mjs --check --only cli && npm run -s compile",
+    "compile": "rm -rf dist && tsc -p tsconfig.json && chmod +x dist/bin.js",
+    "typecheck": "tsc -p tsconfig.test.json --noEmit",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "zapsmtp": "file:../node"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@vitest/coverage-v8": "^2.1.9",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.9"
+  }
+}
