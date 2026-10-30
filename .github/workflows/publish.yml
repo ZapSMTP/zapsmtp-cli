@@ -1,0 +1,42 @@
+# Publishes zapsmtp-cli to npm when a version tag (v0.1.0) is pushed, or by
+# hand (Run workflow). No token: npm trusts this workflow (trusted publishing,
+# configured on npmjs.com for ZapSMTP/zapsmtp-cli, publish.yml, environment
+# npm) and adds provenance. The zapsmtp package of the same version must be
+# on npm first.
+#
+# The full test suite needs the shared conformance cases and spec of the
+# ZapSMTP SDK monorepo and runs there before a release is exported here.
+name: publish
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          registry-url: https://registry.npmjs.org
+      - run: npm install -g npm@latest
+      - name: Tag matches the package version
+        if: github.ref_type == 'tag'
+        run: |
+          v=$(node -p 'require("./package.json").version')
+          [ "${GITHUB_REF_NAME}" = "v$v" ] || { echo "tag ${GITHUB_REF_NAME} != v$v"; exit 1; }
+      - name: Depend on the published zapsmtp (the monorepo links ../node)
+        run: |
+          npm pkg set dependencies.zapsmtp="$(node -p 'require("./package.json").version')"
+          rm -f package-lock.json
+          npm install --no-audit --no-fund
+      - run: npm run -s compile
+      - run: node dist/bin.js --help > /dev/null
+      - run: npm publish --access public
