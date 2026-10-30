@@ -150,10 +150,10 @@ describe('help', () => {
   it('prints the overview, groups and versions', async () => {
     let r = await run([]);
     expect(r.code).toBe(0);
-    expect(r.out).toMatch(/^zapsmtp \d+\.\d+\.\d+: the ZapSMTP command line/);
+    expect(r.out).toMatch(/^zapsmtp \d+\.\d+\.\d+(-[\w.]+)?: the ZapSMTP command line/);
     expect(r.out).toContain('webhooks verify');
     r = await run(['--version']);
-    expect(r.out).toMatch(/^zapsmtp-cli \d+\.\d+\.\d+ \(zapsmtp-node \d+\.\d+\.\d+\)\n$/);
+    expect(r.out).toMatch(/^zapsmtp-cli \d+\.\d+\.\d+(-[\w.]+)? \(zapsmtp-node \d+\.\d+\.\d+(-[\w.]+)?\)\n$/);
     expect(JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')).version).toBe(r.out.split(' ')[1]);
     r = await run(['emails']);
     expect(r.code).toBe(0);
@@ -230,7 +230,7 @@ describe('running operations', () => {
     expect(f.requests.map((q) => [q.headers.authorization, q.url.origin])).toEqual([
       ['Bearer zap_profile', 'http://saved.test'], ['Bearer zap_work', 'http://flag.test'], ['Bearer zap_env', 'https://api.zapsmtp.com'], ['Bearer zap_flag', 'http://saved.test'],
     ]);
-    expect(f.requests[0].headers['user-agent']).toMatch(/^zapsmtp-cli\/\d+\.\d+\.\d+ \(node\/[\d.]+; zapsmtp-node\/\d+\.\d+\.\d+\)$/);
+    expect(f.requests[0].headers['user-agent']).toMatch(/^zapsmtp-cli\/\d+\.\d+\.\d+(-[\w.]+)? \(node\/[\d.]+; zapsmtp-node\/\d+\.\d+\.\d+(-[\w.]+)?\)$/);
   });
 
   it('prints JSON when piped or asked, tables on a terminal', async () => {
