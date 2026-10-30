@@ -263,6 +263,9 @@ async function runOperation(ctx: Ctx, cmd: Command, specs: Map<string, FlagSpec>
 
   const all = ctx.flag('all') !== undefined;
   if (all && !op.returns?.page) throw new UsageError(`${words.join(' ')} is not a list: --all does not apply`, words);
+  // --all walks every page: the largest page the API serves (100) makes the
+  // fewest requests, unless --limit asks for another size
+  if (all && params.limit === undefined && op.query.some((p) => p.name === 'limit')) params.limit = 100;
 
   const client = ctx.client();
   let result: unknown;

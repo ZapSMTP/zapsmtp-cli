@@ -275,6 +275,12 @@ describe('running operations', () => {
     expect((await run(['usage', 'get', '--all'], { env: KEYENV })).err).toContain('usage get is not a list: --all does not apply');
   });
 
+  it('asks for the largest page with --all unless --limit is given', async () => {
+    const f = fakeFetch(() => [200, page([], false)]);
+    await run(['emails', 'list', '--all'], { env: KEYENV, fetch: f.fetch });
+    expect(f.requests.map((q) => q.url.search)).toEqual(['?limit=100']);
+  });
+
   it('exits 1 on API errors with code, message and request id', async () => {
     const f = fakeFetch(() => [422, { message: 'invalid to address', error: { code: 'invalid_parameter', message: 'invalid to address' } }, { 'x-request-id': 'req_9' }]);
     let r = await run(['emails', 'send', '--from', 'a@x.com', '--to', 'bad', '--text', 't'], { env: KEYENV, fetch: f.fetch });
