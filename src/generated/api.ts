@@ -2203,6 +2203,10 @@ export const API: Api = {
      },
      "required": false,
      "doc": "hour (ranges up to 31 days) or day for series.",
+     "enum": [
+      "hour",
+      "day"
+     ],
      "default": "hour up to 48 hours, else day"
     },
     {
