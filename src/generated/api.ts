@@ -242,7 +242,7 @@ export const API: Api = {
       "k": "integer"
      },
      "required": false,
-     "doc": "1-100; out-of-range values fall back to 20.",
+     "doc": "1-100. Limits: 422 invalid_parameter otherwise.",
      "default": "20"
     },
     {
@@ -267,7 +267,7 @@ export const API: Api = {
       "k": "string"
      },
      "required": false,
-     "doc": "Filter by latest status. status=scheduled lists pending scheduled sends instead (different item shape, ordered by scheduled time ascending, has_more always false, other filters/cursors ignored).",
+     "doc": "Filter by latest status. status=scheduled lists pending scheduled sends instead (different item shape, ordered by scheduled time ascending, has_more always false, other filters/cursors ignored, though they must be valid).",
      "enum": [
       "queued",
       "delivered",
@@ -296,7 +296,7 @@ export const API: Api = {
       "k": "integer"
      },
      "required": false,
-     "doc": "Look-back window in days, 1-90 (other values ignored). Always capped by the plan's log retention.",
+     "doc": "Look-back window in days, 1-90. Always capped by the plan's log retention. Limits: 422 invalid_parameter otherwise.",
      "default": "30"
     },
     {
@@ -317,7 +317,7 @@ export const API: Api = {
       "k": "string"
      },
      "required": false,
-     "doc": "Filter live or test-mode (sandbox) traffic; other values ignored.",
+     "doc": "Filter live or test-mode (sandbox) traffic. Limits: 422 invalid_parameter for other values.",
      "enum": [
       "live",
       "test"
@@ -616,7 +616,7 @@ export const API: Api = {
       "k": "integer"
      },
      "required": false,
-     "doc": "1-100; out-of-range falls back to 20.",
+     "doc": "1-100. Limits: 422 invalid_parameter otherwise.",
      "default": "20"
     },
     {
@@ -803,7 +803,7 @@ export const API: Api = {
       "k": "integer"
      },
      "required": false,
-     "doc": "1-100; when omitted or out of range all attachments are returned."
+     "doc": "1-100; when omitted all attachments are returned. Limits: 422 invalid_parameter otherwise."
     },
     {
      "name": "after",
@@ -1183,7 +1183,7 @@ export const API: Api = {
       "k": "integer"
      },
      "required": false,
-     "doc": "1-100; out-of-range falls back to 20.",
+     "doc": "1-100. Limits: 422 invalid_parameter otherwise.",
      "default": "20"
     },
     {
@@ -1208,7 +1208,7 @@ export const API: Api = {
       "k": "boolean"
      },
      "required": false,
-     "doc": "true: only conversations whose last human email came in."
+     "doc": "true: only conversations whose last human email came in. Limits: 422 invalid_parameter unless true or false."
     },
     {
      "name": "unread",
@@ -1216,7 +1216,7 @@ export const API: Api = {
       "k": "boolean"
      },
      "required": false,
-     "doc": "true: only conversations with an email received after their read mark."
+     "doc": "true: only conversations with an email received after their read mark. Limits: 422 invalid_parameter unless true or false."
     },
     {
      "name": "participant",
@@ -2082,7 +2082,7 @@ export const API: Api = {
       "k": "integer"
      },
      "required": false,
-     "doc": "1-720; out-of-range falls back to 24.",
+     "doc": "1-720. Limits: 422 invalid_parameter otherwise.",
      "default": "24"
     }
    ],
@@ -2116,7 +2116,7 @@ export const API: Api = {
       "k": "integer"
      },
      "required": false,
-     "doc": "1-720; out-of-range falls back to 24. Bucket size: <=1h → 60 s, <=6h → 300 s, <=24h → 1800 s, <=168h → 10800 s, otherwise 43200 s.",
+     "doc": "1-720 (422 invalid_parameter otherwise). Bucket size: <=1h → 60 s, <=6h → 300 s, <=24h → 1800 s, <=168h → 10800 s, otherwise 43200 s.",
      "default": "24"
     }
    ],
@@ -2150,7 +2150,7 @@ export const API: Api = {
       "k": "integer"
      },
      "required": false,
-     "doc": "1-720; out-of-range falls back to 24.",
+     "doc": "1-720. Limits: 422 invalid_parameter otherwise.",
      "default": "24"
     }
    ],
@@ -2520,7 +2520,7 @@ export const API: Api = {
       "k": "integer"
      },
      "required": false,
-     "doc": "1-180; out-of-range falls back to 30.",
+     "doc": "1-180. Limits: 422 invalid_parameter otherwise.",
      "default": "30"
     }
    ],
@@ -3848,7 +3848,7 @@ export const API: Api = {
       "k": "integer"
      },
      "required": false,
-     "doc": "1-1000; out-of-range falls back to 100.",
+     "doc": "1-1000. Limits: 422 invalid_parameter otherwise.",
      "default": "100"
     },
     {
@@ -3998,7 +3998,7 @@ export const API: Api = {
       "k": "integer"
      },
      "required": false,
-     "doc": "1–100.",
+     "doc": "1–100. Limits: 422 invalid_parameter otherwise.",
      "default": "20"
     },
     {

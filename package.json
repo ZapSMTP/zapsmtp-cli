@@ -4,6 +4,11 @@
   "description": "The official ZapSMTP command line: send, receive and track email, manage templates, domains, webhooks and everything else the API does",
   "license": "MIT",
   "homepage": "https://zapsmtp.com/docs/sdks/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZapSMTP/zapsmtp-cli.git"
+  },
+  "bugs": "https://github.com/ZapSMTP/zapsmtp-cli/issues",
   "keywords": ["cli", "email", "smtp", "transactional email", "zapsmtp", "api"],
   "type": "module",
   "engines": { "node": ">=18.3" },
