@@ -4123,6 +4123,63 @@ export const API: Api = {
    "idempotent": false
   },
   {
+   "id": "get-account",
+   "title": "Retrieve the account",
+   "summary": "The account the key belongs to: its name, status and sending rate limit, the plan with its limits, this month’s sent count and the SMTP relay settings.",
+   "doc": "The account the key belongs to: its name, status and sending rate limit, the plan with its limits, this month’s sent count and the SMTP relay settings. Requires a full-access key. spend_cap_cents is null without a spending cap. For the month’s overage and limit use GET /usage. Plan changes and payments are made in the dashboard, never with an API key.",
+   "httpMethod": "GET",
+   "path": "/account",
+   "resource": [
+    "account"
+   ],
+   "method": "get",
+   "pathParams": [],
+   "query": [],
+   "body": [],
+   "options": [],
+   "bodyArray": null,
+   "hasParams": false,
+   "returns": {
+    "model": "AccountInfo",
+    "page": false
+   },
+   "paging": null,
+   "idempotent": false
+  },
+  {
+   "id": "update-account",
+   "title": "Rename the account",
+   "summary": "Rename the account. Answers the account as GET /account does.",
+   "doc": "Rename the account. Answers the account as GET /account does. Requires a full-access live key; test keys get 403 test_key_restricted.",
+   "httpMethod": "PATCH",
+   "path": "/account",
+   "resource": [
+    "account"
+   ],
+   "method": "update",
+   "pathParams": [],
+   "query": [],
+   "body": [
+    {
+     "name": "name",
+     "type": {
+      "k": "string"
+     },
+     "required": true,
+     "doc": "1–100 characters."
+    }
+   ],
+   "options": [],
+   "bodyArray": null,
+   "hasParams": true,
+   "returns": {
+    "model": "AccountInfo",
+    "page": false
+   },
+   "paging": null,
+   "idempotent": false
+  },
+  {
    "id": "update-api-key",
    "title": "Update an API key",
    "summary": "Rename a key or change its permission and restrictions. The token and the mode never change; the new rights apply to the next request.",

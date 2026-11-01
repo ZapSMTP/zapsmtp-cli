@@ -3,7 +3,7 @@
 The official command line for [ZapSMTP](https://zapsmtp.com): send, receive and track email, and
 manage templates, domains, webhooks and everything else the API does, from your terminal or a script.
 
-- **The whole API**: a command for every API operation (112), generated from the API reference, with
+- **The whole API**: a command for every API operation (114), generated from the API reference, with
   `--help` for each.
 - **Typed flags**: `--to a --to b`, `--tag plan=pro`, `--metadata order=42`, `--attach ./invoice.pdf`,
   `--html-file body.html`, `--tracking.opens=false`, or the whole body as `--json '{...}'`.
