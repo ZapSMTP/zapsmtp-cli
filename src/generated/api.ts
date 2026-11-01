@@ -172,7 +172,7 @@ export const API: Api = {
       "k": "string"
      },
      "required": false,
-     "doc": "required or verified: deliver only over TLS (verified: with a valid certificate for the receiving server). Raises the domain's policy, never lowers it."
+     "doc": "opportunistic, required or verified: required delivers only over TLS, verified only with a valid certificate for the receiving server. The stricter of this and the domain’s policy applies: it raises the domain’s policy, never lowers it."
     }
    ],
    "options": [],
@@ -1152,6 +1152,14 @@ export const API: Api = {
      },
      "required": false,
      "doc": "RFC 3339 time (e.g. 2026-10-21T15:00:00Z) or relative \"in <n> <unit>\" with unit min|mins|minute|minutes|h|hour|hours|d|day|days. Times in the past send immediately. Limits: unparsable → 422 invalid_parameter; more than 7 days ahead → 422 invalid_parameter \"scheduled_at must be within 7 days\""
+    },
+    {
+     "name": "tls",
+     "type": {
+      "k": "string"
+     },
+     "required": false,
+     "doc": "opportunistic, required or verified: required delivers only over TLS, verified only with a valid certificate for the receiving server. The stricter of this and the domain’s policy applies: it raises the domain’s policy, never lowers it."
     }
    ],
    "options": [],
@@ -5618,7 +5626,7 @@ export const API: Api = {
       "k": "string"
      },
      "required": false,
-     "doc": "required or verified: deliver only over TLS (verified: with a valid certificate for the receiving server). Raises the domain's policy, never lowers it."
+     "doc": "opportunistic, required or verified: required delivers only over TLS, verified only with a valid certificate for the receiving server. The stricter of this and the domain’s policy applies: it raises the domain’s policy, never lowers it."
     }
    ]
   },

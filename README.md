@@ -100,6 +100,7 @@ method in kebab-case: `zap.emails.receiving.list` is `zapsmtp emails receiving l
 | `suppressions` | `list`, `get`, `create`, `delete`, `create-batch`, `delete-batch` |
 | `stats` | `get`, `timeseries`, `breakdown`, `metrics` |
 | `logs`, `usage`, `simulator`, `dedicated-ips` | API logs, usage and plan, simulator addresses, dedicated IPs |
+| `account` | `get` (plan, limits, this month's sends, SMTP settings), `update --name` |
 | `api-keys`, `smtp-credentials` | Keys and SMTP relay credentials |
 
 ## Flags
